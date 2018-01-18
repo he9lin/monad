@@ -8,7 +8,7 @@ defmodule Monad.Mixfile do
      description: "Monads and do-syntax for Elixir",
      source_url: "https://github.com/rmies/monad",
      package: package,
-     elixir: "~> 1.0",
+     elixir: "~> 1.4",
      deps: deps]
   end
 
