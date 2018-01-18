@@ -244,7 +244,7 @@ defmodule Monad.Pipeline do
             raise ArgumentError, message:
               "Monad.p called with a list but it's not a keyword list with " <>
               "a 'do' key (i.e. not a passed do block)"
-          { __block__, _, [expr] }    -> p_expand(expr)
+          {:__block__, _, [expr] }    -> p_expand(expr)
           expr                        -> p_expand(expr)
         end
       end
