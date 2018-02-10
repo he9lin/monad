@@ -7,9 +7,9 @@ defmodule Monad.Mixfile do
      name: "monad",
      description: "Monads and do-syntax for Elixir",
      source_url: "https://github.com/rmies/monad",
-     package: package,
+     package: package(),
      elixir: "~> 1.4",
-     deps: deps]
+     deps: deps()]
   end
 
   # Configuration for the OTP application
