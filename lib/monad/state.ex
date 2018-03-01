@@ -14,7 +14,7 @@ defmodule Monad.State do
       iex> require Monad.State, as: State
       iex> import State
       iex> s = State.m do
-      ...>       a <- get
+      ...>       a <- get()
       ...>       put (a + 1)
       ...>       return a + 10
       ...>     end

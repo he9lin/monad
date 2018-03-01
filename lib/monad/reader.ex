@@ -13,7 +13,7 @@ defmodule Monad.Reader do
       iex> import Reader
       iex> r = Reader.m do
       ...>       let a = 2
-      ...>       b <- ask
+      ...>       b <- ask()
       ...>       return a + b
       ...>     end
       iex> Reader.run(10, r)

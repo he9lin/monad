@@ -17,7 +17,7 @@ defmodule Monad.Writer do
 
       # Outside the module.
       defmodule ListWriter do
-        def initial, do: []
+        def initial(), do: []
         def combine(new, acc), do: acc ++ new
       end
 
@@ -61,7 +61,7 @@ defmodule Monad.Writer do
       end
 
       @spec return(any) :: W.writer_m
-      def return(x), do: fn -> { x, initial } end
+      def return(x), do: fn -> { x, initial() } end
 
       @doc """
       Run the writer. Returns the return value and the output value.
