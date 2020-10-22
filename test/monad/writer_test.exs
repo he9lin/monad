@@ -1,11 +1,11 @@
 defmodule WList do
   use Monad.Writer
-  def initial, do: []
+  def initial(), do: []
   def combine(new, acc), do: acc ++ new
 end
 
 defmodule Monad.WriterTest do
-  use ExUnit.Case, async: true 
+  use ExUnit.Case, async: true
 
   doctest Monad.Writer
 

@@ -1,6 +1,4 @@
 defmodule Monad.Writer do
-  use Behaviour
-
   @moduledoc """
   The Writer monad.
 
@@ -19,7 +17,7 @@ defmodule Monad.Writer do
 
       # Outside the module.
       defmodule ListWriter do
-        def initial, do: []
+        def initial(), do: []
         def combine(new, acc), do: acc ++ new
       end
 
@@ -63,7 +61,7 @@ defmodule Monad.Writer do
       end
 
       @spec return(any) :: W.writer_m
-      def return(x), do: fn -> { x, initial } end
+      def return(x), do: fn -> { x, initial() } end
 
       @doc """
       Run the writer. Returns the return value and the output value.
@@ -82,10 +80,10 @@ defmodule Monad.Writer do
   @doc """
   Returns an initial output value.
   """
-  defcallback initial() :: output
+  @callback initial() :: output
 
   @doc """
   Adds a new piece of output to the output list.
   """
-  defcallback combine(output, output) :: output
+  @callback combine(output, output) :: output
 end

@@ -1,6 +1,4 @@
 defmodule Monad do
-  use Behaviour
-
   @moduledoc """
   Behaviour that provides monadic do-notation and pipe-notation.
 
@@ -155,12 +153,12 @@ defmodule Monad do
   @doc """
   Inject a value into a monad.
   """
-  defcallback return(any) :: monad
+  @callback return(any) :: monad
 
   @doc """
   Bind a value in the monad to the passed function which returns a new monad.
   """
-  defcallback bind(monad, (any -> monad)) :: monad
+  @callback bind(monad, (any -> monad)) :: monad
 end
 
 defmodule Monad.Internal do
@@ -228,7 +226,6 @@ defmodule Monad.Pipeline do
   Just use `use Monad.Pipeline` in your monad module and define `return/1` and
   `bind/2` and get `pipebind/2` for free.
   """
-  use Behaviour
 
   defmacro __using__(_opts) do
     quote location: :keep do
@@ -244,7 +241,7 @@ defmodule Monad.Pipeline do
             raise ArgumentError, message:
               "Monad.p called with a list but it's not a keyword list with " <>
               "a 'do' key (i.e. not a passed do block)"
-          { __block__, _, [expr] }    -> p_expand(expr)
+          {:__block__, _, [expr] }    -> p_expand(expr)
           expr                        -> p_expand(expr)
         end
       end
@@ -278,5 +275,5 @@ defmodule Monad.Pipeline do
   Like bind/2 but works on ASTs and the second argument should be a function
   call where the first argument is missing.
   """
-  defcallback pipebind(Macro.t, Macro.t) :: Macro.t
+  @callback pipebind(Macro.t, Macro.t) :: Macro.t
 end

@@ -27,7 +27,7 @@ defmodule Monad.StateTest do
   test "Monad.State get and put" do
     assert run(4, (State.m do
                      let x = 2
-                     y <- get
+                     y <- get()
                      put x
                      return (x * y)
                    end)) == {8, 2}

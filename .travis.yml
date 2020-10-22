@@ -1,13 +1,11 @@
-language: erlang
-env:
-  - ELIXIR_VER=v1.0.2
+language: elixir
+elixir:
+  - 1.4.5
 otp_release:
-  - 17.1
-  - 17.0
+  - 18.0
+  - 19.0
+  - 20.0
 before_install:
-  - mkdir -p vendor/elixir
-  - wget -q https://github.com/elixir-lang/elixir/releases/download/$ELIXIR_VER/Precompiled.zip && unzip -qq Precompiled.zip -d vendor/elixir
-  - export PATH="$PATH:$PWD/vendor/elixir/bin"
   - mix archive.install http://s3.hex.pm/installs/hex.ez --force
   - export MIX_ENV=test
 before_script:
