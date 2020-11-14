@@ -45,6 +45,16 @@ defmodule Monad.Maybe do
   def bind({:just, x}, f), do: f.(x)
   def bind(:nothing, _), do: :nothing
 
+  @spec map(maybe_m, (any -> any)) :: maybe_m
+  @doc """
+  Map the value inside Maybe monad `m` to function `f`.
+
+  Note that the computation shortcircuits if `m` is `:nothing`.
+  """
+  def map(m, f)
+  def map({:just, x}, f), do: {:just, f.(x)}
+  def map(:nothing, _), do: :nothing
+
   @doc """
   Inject `x` into a Maybe monad, i.e. returns `{:just, x}`.
   """

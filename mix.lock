@@ -1,4 +1,4 @@
 %{
   "earmark": {:git, "https://github.com/pragdave/earmark.git", "8de6f9186a55b3fad00295d2d25bdfe6cf4c54cb", []},
-  "ex_doc": {:hex, :ex_doc, "0.6.2", "e51e39a1274201c753754fafd640be217568d552d2a70a2bb69b93d335eb027b", [:mix], [], "hexpm"},
+  "ex_doc": {:hex, :ex_doc, "0.6.2", "e51e39a1274201c753754fafd640be217568d552d2a70a2bb69b93d335eb027b", [:mix], [], "hexpm", "fdd21c651fbe96f39697c3acd9ee6b849348cafb4000b92a130e2df8a0a3e2b6"},
 }

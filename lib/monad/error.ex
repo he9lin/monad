@@ -32,6 +32,7 @@ defmodule Monad.Error do
       {:error, "aborted"}
   """
 
+  @type t(error, value) :: {:error, error} | {:ok, value}
   @type error_m :: {:error, any} | {:ok, any}
 
   ## Monad callback implementations
@@ -52,6 +53,13 @@ defmodule Monad.Error do
   @spec return(any) :: error_m
   def return(x), do: {:ok, x}
 
+  @doc """
+  Map error for a Error monad.
+  """
+  @spec map_error(error_m, (any -> any)) :: error_m
+  def map_error({:error, error}, f), do: fail(f.(error))
+  def map_error(m, _), do: m
+
   ## Auxiliary functions
 
   @doc """
@@ -59,4 +67,18 @@ defmodule Monad.Error do
   """
   @spec fail(any) :: error_m
   def fail(msg), do: {:error, msg}
+
+
+  @spec choose([error_m]) :: error_m
+  def choose(results) when is_list(results) do
+    results
+    |> Enum.filter(fn result ->
+      case result do
+        {:ok, _} -> true
+        _ -> false
+      end
+    end)
+    |> Enum.map(fn {:ok, v} -> v end)
+    |> return()
+  end
 end
