@@ -81,4 +81,14 @@ defmodule Monad.Error do
     |> Enum.map(fn {:ok, v} -> v end)
     |> return()
   end
+
+  @spec fold(error_m, (any -> any), (any -> any)) :: any
+  def fold(e, sf, ef) do
+    case e do
+      {:ok, v} ->
+        sf.(v)
+      {:error, err} ->
+        ef.(err)
+    end
+  end
 end
