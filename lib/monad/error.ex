@@ -48,6 +48,13 @@ defmodule Monad.Error do
   def bind({:ok, x}, f), do: f.(x)
 
   @doc """
+  Map the value inside Error monad `m` to function `f`.
+  """
+  def map(m, f)
+  def map(e = {:error, _}, _), do: e
+  def map({:ok, x}, f), do: return(f.(x))
+
+  @doc """
   Inject `x` into a Error monad, i.e. returns {:ok, x}.
   """
   @spec return(any) :: error_m
@@ -67,7 +74,6 @@ defmodule Monad.Error do
   """
   @spec fail(any) :: error_m
   def fail(msg), do: {:error, msg}
-
 
   @spec choose([error_m]) :: error_m
   def choose(results) when is_list(results) do
