@@ -31,6 +31,8 @@ defmodule Monad.Maybe do
       :nothing
   """
 
+  @type t(value) :: {:just, value} | :nothing
+
   @type maybe_m :: {:just, any} | :nothing
 
   ## Monad implementations
@@ -69,6 +71,9 @@ defmodule Monad.Maybe do
   @spec fail(any) :: maybe_m
   def fail(msg)
   def fail(_), do: :nothing
+
+  @spec none() :: maybe_m
+  def none(), do: :nothing
 
   @doc """
   Call function `f` with `x` if `m` is `{:just, x}`, otherwise call function `f`
