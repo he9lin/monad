@@ -177,4 +177,20 @@ defmodule Monad.Maybe do
   def map_maybes(f, l) do
     for x <- l, is_just(f.(x)), do: from_just f.(x)
   end
+
+  @spec fold(maybe_m, (any -> any), (any -> any)) :: any
+  def fold(e, sf, ef) do
+    case e do
+      :nothing -> ef.()
+      {:just, v} -> sf.(v)
+    end
+  end
+
+  @spec unwrap_with_default(maybe_m, any) :: any
+  def unwrap_with_default(e, default_v) do
+    case e do
+      :nothing -> default_v
+      {:just, v} -> v
+    end
+  end
 end
