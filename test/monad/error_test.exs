@@ -69,4 +69,11 @@ defmodule Monad.ErrorTest do
               return x * x
             end) == {:error, "reason"}
   end
+
+  test "Monad.Error handle_error" do
+    assert Monad.Error.handle_error(
+      {:error, :bad},
+      fn _ -> {:ok, :rescued} end
+    ) == {:ok, :rescued}
+  end
 end

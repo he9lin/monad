@@ -97,4 +97,13 @@ defmodule Monad.Error do
         ef.(err)
     end
   end
+
+  def handle_error(e, f) do
+    case e do
+      {:ok, _} = ok ->
+        ok
+      {:error, err} ->
+        f.(err)
+    end
+  end
 end
